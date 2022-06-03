@@ -12,11 +12,11 @@ body {
     sans-serif;
 }
 
-
-html, body {
-    scroll-behavior: smooth;
+html,
+body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
-
 
 @tailwind base;
 @tailwind components;
