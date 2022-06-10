@@ -1,6 +1,6 @@
 import icecream1 from '../../img/i1.png';
 import fruit1 from '../../img/f5.png';
-import fruit2 from '../../img/f4.png';
+import fruit6 from '../../img/f8.png';
 import rice5 from '../../img/r5.png';
 
 export const staticImg = [
@@ -13,10 +13,10 @@ export const staticImg = [
   },
   {
     id: 2,
-    name: 'BlueBerry',
+    name: 'Apples',
     desc: 'Yummy',
     price: '#699.99',
-    source: fruit2,
+    source: fruit6,
   },
   {
     id: 3,
@@ -44,6 +44,6 @@ export const categories = [
   { id: 7, name: 'Sharwama', slug: 'sharwama' },
   { id: 8, name: 'Curry', slug: 'curry' },
   { id: 9, name: 'Rice', slug: 'rice' },
-  { id: 10, name: 'Soft Fruits', slug: 'fruits' },
+  { id: 10, name: 'fruits', slug: 'fruits' },
   { id: 11, name: 'Icecreams', slug: 'snacks' },
 ];

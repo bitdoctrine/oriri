@@ -17,7 +17,7 @@ export default function Header() {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
 
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, cartShow, cartItems }, dispatch] = useStateValue();
 
   const login = async () => {
     if (!user) {
@@ -95,6 +95,9 @@ export default function Header() {
             </motion.li>
           </motion.ul>
           <motion.div
+            onClick={() =>
+              dispatch({ type: actionType.SET_CART_SHOW, cartShow: true })
+            }
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ opacity: 0, y: 0 }}
@@ -105,9 +108,13 @@ export default function Header() {
               onClick={() => setMenu(false)}
               className="text-purple-600 text-2xl cursor-pointer"
             />
-            <div className=" cursor-pointer absolute  -top-3 -right-3 w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center">
-              <p className="text-xs text-white font-semibold">2</p>
-            </div>
+            {cartItems && cartItems.length > 0 && (
+              <div className=" cursor-pointer absolute  -top-1 -right-3 w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center">
+                <p className="text-xs text-white font-semibold">
+                  {cartItems.length}
+                </p>
+              </div>
+            )}
           </motion.div>
 
           <div className="relative">
@@ -146,7 +153,10 @@ export default function Header() {
       {/* mobile*/}
       <div className="md:hidden flex w-full h-full flex-center justify-between ">
         <motion.div
-          onClick={() => setMenu(false)}
+          onClick={() => {
+            setMenu(false);
+            dispatch({ type: actionType.SET_CART_SHOW, cartShow: true });
+          }}
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ opacity: 0, y: 0 }}
@@ -154,9 +164,13 @@ export default function Header() {
           className="relative  flex items-center justify-center"
         >
           <CgShoppingBag className="text-purple-600 text-2xl cursor-pointer" />
-          <div className=" cursor-pointer absolute  -top-1 -right-3 w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center">
-            <p className="text-xs text-white font-semibold">2</p>
-          </div>
+          {cartItems && cartItems.length > 0 && (
+            <div className=" cursor-pointer absolute  -top-1 -right-3 w-6 h-6 rounded-full bg-cartNumBg flex items-center justify-center">
+              <p className="text-xs text-white font-semibold">
+                {cartItems.length}
+              </p>
+            </div>
+          )}
         </motion.div>
         <div className="relative">
           <motion.img

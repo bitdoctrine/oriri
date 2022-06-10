@@ -7,16 +7,16 @@ import { getMenuItems } from './components/utils/firebaseFunctions';
 import { actionType } from './components/context/reducer';
 
 export default function App() {
-  const [{menuItems}, dispatch] = useStateValue();
-  const fetchData = async () => {
-    await getMenuItems().then((data) => {
-      dispatch({ type: actionType.SET_MENU_ITEMS, menuItems: data });
-    });
-  };
+  const [{ menuItems }, dispatch] = useStateValue();
 
   useEffect(() => {
+    const fetchData = async () => {
+      await getMenuItems().then((data) => {
+        dispatch({ type: actionType.SET_MENU_ITEMS, menuItems: data });
+      });
+    };
     fetchData();
-  }, []);
+  }, [dispatch]);
   return (
     <AnimatePresence exitBeforeEnter>
       <div className="w-screen h-auto flex flex-col bg-primary">

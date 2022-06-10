@@ -136,11 +136,7 @@ export const CreateContainer = () => {
     setCategory('Select Category');
   };
 
-  const fetchData = async () => {
-    await getMenuItems().then((data) => {
-      dispatch({ type: actionType.SET_MENU_ITEMS, menuItems: data });
-    });
-  };
+ 
 
   return (
     <div className="w-full  min-h-screen  flex items-center justify-center gap-3">
