@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsCartPlusFill } from 'react-icons/bs';
 import { motion } from 'framer-motion';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import notFound from '../img/NotFound.svg';
+import { useStateValue } from './context/StateProvider';
+import { actionType } from './context/reducer';
 
 const Row = ({ flag, data }) => {
+  const [{ cartItems }, dispatch] = useStateValue();
+
   const slideLeft = () => {
     let slider = document.getElementById('slider');
     slider.scrollLeft = slider.scrollLeft - 350;
@@ -13,6 +17,15 @@ const Row = ({ flag, data }) => {
   const slideRight = () => {
     let slider = document.getElementById('slider');
     slider.scrollLeft = slider.scrollLeft + 350;
+  };
+
+  const addToCart = (item) => {
+    dispatch({
+      type: actionType.SET_CART_ITEMS,
+      cartItems: [...cartItems, item],
+    });
+
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   };
   return (
     <div className="flex relative items-center">
@@ -27,7 +40,7 @@ const Row = ({ flag, data }) => {
       </motion.div>
       <div
         id="slider"
-        className={`w-full flex scroll-smooth items-center justify-center gap-3 my-12  px-2 rounded-lg ${
+        className={`w-full flex bg-slate-100 scroll-smooth items-center justify-center gap-3 my-12  px-2 rounded-lg ${
           flag
             ? 'overflow-x-scroll scrollbar-none'
             : 'overflow-x-hidden flex-wrap'
@@ -37,7 +50,7 @@ const Row = ({ flag, data }) => {
           data.map((item) => (
             <motion.div
               key={item.id}
-              className="w-250 h-auto min-w-[250px] md:min-w-[340] md:w-250 my-12 p-2  rounded-lg hover:scale-110 cursor-pointer bg-cardOverlay transition-all duration-1000 ease-linear backdrop-blur-lg"
+              className="w-250 h-auto min-w-[250px] md:min-w-[340] md:w-250 my-12 p-2 rounded-3xl hover:scale-110 cursor-pointer bg-cardOverlay transition-all duration-1000 ease-linear drop-shadow-lg backdrop-blur-lg"
             >
               <div className="w-full flex items-center justify-between">
                 <motion.img
@@ -46,6 +59,7 @@ const Row = ({ flag, data }) => {
                   className="w-44 -mt-8 transition-all duration-200 ease-in cursor-pointer"
                 />
                 <motion.div
+                  onClick={() => addToCart(item)}
                   whileTap={{ scale: 0.7 }}
                   className="w-10 h-10 rounded-full cursor-pointer  border bg-red-600 flex items-center justify-center hover:shadow-md"
                 >

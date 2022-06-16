@@ -6,3 +6,4 @@ export { default as LoadingBox } from '../components/LoadingBox';
 export { default as Row } from '../components/Row';
 export { default as MenuContainer } from '../components/MenuContainer';
 export { default as Cart } from '../components/Cart';
+export { default as CartItems} from '../components/CartItems';
